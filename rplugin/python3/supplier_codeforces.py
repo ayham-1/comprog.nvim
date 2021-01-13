@@ -1,7 +1,6 @@
 #!/bin/python3
 
 from codeforces import problem
-
 from data_types import Supplier
 
 class Codeforces(Supplier):
