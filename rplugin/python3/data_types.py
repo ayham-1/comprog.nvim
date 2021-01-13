@@ -54,7 +54,7 @@ class Config:
     pwd = ""
     tasks = []
 
-    def __init__(self)
+    def __init__(self):
         pass
     
     def load(self, config):
