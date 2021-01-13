@@ -19,7 +19,6 @@ class Hackerrank(Supplier):
         # Download sample data then extract
         destination = os.path.join(xdg_cache_home(), "comporg")
         os.system("wget -O {} {}".format("sample.zip", problem_url))
-        os.system("mkdir -p {}".format(destination))
         os.system("mv sample.zip {}".format(destination))
         sample_file_zip = os.path.join(destination, "sample.zip")
         with zipfile.ZipFile(sample_file_zip, 'r') as zip_ref:
@@ -35,6 +34,7 @@ class Hackerrank(Supplier):
         # Read sample output
         output_data = []
         outputs = os.listdir(os.path.join(destination, "output"))
+        os.system("mkdir -p {}".format(destination))
         for i in outputs:
             f = open(os.path.join(destination, "output", i))
             output_data.append(f.read())
