@@ -4,8 +4,14 @@ import pynvim
 
 @pynvim.plugin
 class Main(object):
+    config = None
+
     def __init__(self, vim):
         self.vim = vim
+
+    @pynvim.command('ComprogStartUp', nargs='*')
+    def startUp(self, args):
+        pass
 
     @pynvim.command('ComprogTaskCreate', nargs='*')
     def createTask(self, args):
@@ -34,7 +40,3 @@ class Main(object):
     @pynvim.command('ComprogTaskRun', nargs='*')
     def runTask(self, args):
         pass
-
-    @pynvim.command('DoItPython')
-    def doItPython(self):
-        self.vim.command('echo "ello"')
