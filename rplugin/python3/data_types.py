@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import json
+import os.path
 
 class Supplier:
     url = ""
@@ -73,13 +74,17 @@ class Config:
 
     def __init__(self, file_loc):
         self.pwd = file_loc
-        with open(self.pwd) as f:
-            config_dat = f.read()
-            self.deserialize(config_dat)
+        if os.path.isfile(file_loc):
+            with open(self.pwd) as f:
+                config_dat = f.read()
+                if config_dat != "":
+                    self.deserialize(config_dat)
+        else:
+            self.save()
 
     def save(self):
         dat = self.serialize()
-        with open(self.pwd) as f:
+        with open(self.pwd, "w+") as f:
             json.dump(dat, f, indent=4)
 
     def serialize(self):
@@ -88,16 +93,19 @@ class Config:
             "tasks": []
         }
 
-        for task in task:
-            dat["tasks"].update(task.serialize())
+        for task in dat["tasks"]:
+            task.update(task.serialize())
 
         return dat
 
     def deserialize(self, dat):
         parsed = json.loads(dat)
-        assert(self.pwd, parsed["pwd"]), "create and load config from the same place!"
+        assert(self.pwd == parsed["pwd"]), "create and load config from the same place!"
 
         for task in parsed["tasks"]:
             parsed_task = Task()
             parsed_task.deserialize(task)
             tasks.append(parsed_task)
+
+if __name__ == "__main__":
+    conf = Config("config")
