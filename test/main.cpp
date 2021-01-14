@@ -1,5 +1,8 @@
 #include <iostream>
+#include <string>
 int main() {
-	std::cout << "ello, there!" << std::endl;
+	std::string input;
+	std::getline(std::cin, input);
+	std::cout << input << std::endl;
 	return 0;
 }
