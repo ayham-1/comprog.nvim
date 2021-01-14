@@ -7,12 +7,12 @@ from data_types import Language
 class Python(Language):
     def __init__(self):
         self.name = "Python"
-        self.ext = [".py", ".py3"]
-        self.cmd = "python3"
+        self.ext = [".py",]
+        self.cmd = "python"
 
     def run(self, file_loc, stdin_input):
         args = "{}".format(file_loc)
-        output = subprocess.check_output("echo {} | python3 {}".format(stdin_input, file_loc),
+        output = subprocess.check_output("echo {} | python {}".format(stdin_input, file_loc),
                        shell=True)
         return output
 
